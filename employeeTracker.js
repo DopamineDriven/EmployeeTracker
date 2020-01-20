@@ -1,5 +1,5 @@
 const inquirer = require("inquirer");
-const db = require("./db");
+const connection = require("./db");
 
 //figlet generated banner
 const { displayFiglet } = ("./utilities/figlet");
@@ -34,7 +34,7 @@ const {
 
 
 async function init() {
-    db.dropAndInit();
+    connection.dropAndInitialize();
     await displayFiglet();
     await runTerminal();
 }
@@ -59,68 +59,90 @@ async function runTerminal() {
                 "Add Role",
                 "Remove Role",
                 "View Total Budget",
-                "View Total Utilized Budget By Department"
+                "View Total Utilized Budget By Department",
+                "Exit"
             ]
         })
             switch (answer.action) {
                 case "View All Employees":
                     await allEmployees();
+                    runTerminal();
                     break;
                 
                 case "View All Employees By Department":
                     await byDepartment();
+                    runTerminal();
                     break;
                 
                 case "View All Employees By Manager":
                     await byManager();
+                    runTerminal();
                     break;
                 
                 case "View All Departments":
                     await allDepartments();
+                    runTerminal();
                     break;
 
                 case "View All Roles":
                     await allRoles();
+                    runTerminal();
                     break;
                 
                 case "Add Employee":
                     await addEmployee();
+                    runTerminal();
                     break;
 
                 case "Remove Employee":
                     await removeEmployee();
+                    runTerminal();
                     break;
 
                 case "Update Employee Role":
                     await updateEmployeeRole();
+                    runTerminal();
                     break;
                 
                 case "Update Employee Manager":
                     await updateManager();
+                    runTerminal();
                     break;
                 
                 case "Add Department":
                     await addDepartment();
+                    runTerminal();
                     break;
 
                 case "Remove Department":
                     await removeDepartment();
+                    runTerminal();
                     break;
 
                 case "Add Role":
                     await addRole();
+                    runTerminal();
                     break;
                 
                 case "Remove Role":
                     await removeRole();
+                    runTerminal();
                     break;
 
                 case "View Total Budget":
                     await totalBudget();
+                    runTerminal();
                     break;
 
                 case "View Total Utilized Budget By Department":
-                    totalUtilizedBudgetByDepartment();
+                    await totalUtilizedBudgetByDepartment();
+                    runTerminal();
+                    break;
+                
+                case "Exit":
+                    console.log('Thank you for using employee tracker')
+                    connection.dropAndStop();
+                default:
                     break;
             }
      }

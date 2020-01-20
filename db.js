@@ -113,7 +113,7 @@ const seededDatabase = {
             }
         );
     },
-    dropAndInit: function () {
+    dropAndInitialize: function () {
         this.reset();
         this.init();
     },
