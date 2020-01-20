@@ -1,0 +1,30 @@
+{
+  "name": "employeetracker",
+  "version": "1.0.0",
+  "description": "This is an employee tracking app made with MySQL and Node.js",
+  "main": "employeeTracker.js",
+  "dependencies": {
+    "inquirer": "^7.0.3",
+    "mysql": "^2.17.1",
+    "nodemon": "^2.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon employeeTracker.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DopamineDriven/EmployeeTracker.git"
+  },
+  "keywords": [
+    "node.js",
+    "mysql",
+    "inquirer"
+  ],
+  "author": "Andrew Ross",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DopamineDriven/EmployeeTracker/issues"
+  },
+  "homepage": "https://github.com/DopamineDriven/EmployeeTracker#readme"
+}
