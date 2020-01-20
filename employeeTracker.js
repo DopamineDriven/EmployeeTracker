@@ -1,38 +1,42 @@
 const inquirer = require("inquirer");
 const connection = require("./db");
 
-//figlet generated banner
-const { displayFiglet } = ("./utilities/figlet");
+//figlet utility
+const { displayFiglet } = require("./utilities/figlet");
 
-//controllers
+//employee controller
 const {
     addEmployee,
     removeEmployee,
     updateEmployeeRole,
-    updateEmployeeRole,
-    allEmployees,
-    byDepartment,
-    byManager
+    updateEmployeeManager,
+    viewAllEmployees,
+    viewByDepartment,
+    viewByManager
 } = require('./controllers/employee');
 
+//budget controller
 const {
-    totalBudget,
-    totalUtilizedBudgetByDepartment
+    viewTotalBudget,
+    viewTotalUtilizedBudgetByDepartment
 } = require('./controllers/budget');
 
+//department controller
 const {
     addDepartment,
     removeDepartment,
-    allDepartments
+    viewAllDepartments
 } = require('./controllers/department');
 
+//role controller
 const {
     addRole,
     removeRole,
-    allRoles
+    viewAllRoles
 } = require('./controllers/role');
 
 
+//asynchronous to increase app performance && responsiveness
 async function init() {
     connection.dropAndInitialize();
     await displayFiglet();
@@ -62,30 +66,30 @@ async function runTerminal() {
                 "View Total Utilized Budget By Department",
                 "Exit"
             ]
-        })
+        });
             switch (answer.action) {
                 case "View All Employees":
-                    await allEmployees();
+                    await viewAllEmployees();
                     runTerminal();
                     break;
                 
                 case "View All Employees By Department":
-                    await byDepartment();
+                    await viewByDepartment();
                     runTerminal();
                     break;
                 
                 case "View All Employees By Manager":
-                    await byManager();
+                    await viewByManager();
                     runTerminal();
                     break;
                 
                 case "View All Departments":
-                    await allDepartments();
+                    await viewAllDepartments();
                     runTerminal();
                     break;
 
                 case "View All Roles":
-                    await allRoles();
+                    await viewAllRoles();
                     runTerminal();
                     break;
                 
@@ -105,7 +109,7 @@ async function runTerminal() {
                     break;
                 
                 case "Update Employee Manager":
-                    await updateManager();
+                    await updateEmployeeManager();
                     runTerminal();
                     break;
                 
@@ -130,12 +134,12 @@ async function runTerminal() {
                     break;
 
                 case "View Total Budget":
-                    await totalBudget();
+                    await viewTotalBudget();
                     runTerminal();
                     break;
 
                 case "View Total Utilized Budget By Department":
-                    await totalUtilizedBudgetByDepartment();
+                    await viewTotalUtilizedBudgetByDepartment();
                     runTerminal();
                     break;
                 
@@ -145,6 +149,6 @@ async function runTerminal() {
                 default:
                     break;
             }
-     }
+     };
 
 init();
